@@ -1,0 +1,34 @@
+#include<SoftwareSerial.h>
+/* Create object named bt of the class SoftwareSerial */
+SoftwareSerial bt(2,3); /* (Rx,Tx) */ 
+char received_data;    /*Declaration of variable*/
+void setup()
+{ 
+ bt.begin(9600); /* Define baud rate for software serial communication */  
+Serial.begin(9600); /* Define baud rate for serial communication */
+pinMode(7,OUTPUT);    /*Declare pin 7 as output pin*/
+pinMode(8,OUTPUT);     /*Declare pin 8 as output pin*/
+digitalWrite(7,HIGH);
+}
+void loop() 
+{
+     if (bt.available()) /* If data is available on serial port */   
+ {      //Serial.println((char)bt.read());      
+          received_data=bt.read(); /* Save character received on to the serial monitor */      
+          Serial.println(received_data);   /* Print character received on to the serial monitor */        
+if(received_data=='a')         /*check for received command for light on/off */       
+{        digitalWrite(7, LOW);            
+ }                
+if(received_data=='A')                
+{        digitalWrite(7, HIGH);             
+}      
+ if(received_data=='b')       /*check for received command for fan on/off */        
+
+{        
+digitalWrite(8, HIGH);            
+ }               
+ if(received_data=='B')                
+{        digitalWrite(8, LOW);   
+ } 
+   } 
+   }
